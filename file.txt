@@ -1,0 +1,62 @@
+username: kumarsagar09062001
+pass: 0vpWFh9F7AXt3omf
+
+async function insertPost() {
+  const count = await Post.countDocuments();
+  if (count === 0) {
+    await Post.insertMany([
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      }
+    ]);
+    console.log('Posts inserted');
+  } else {
+    console.log('Posts already exist, skipping insertion');
+  }
+}
+
+
+insertPost();
+
+
+
+
+// passs: Cy7LmtKMmDyWRn9a
+// usernam: kumarsagar09062001

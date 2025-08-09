@@ -1,0 +1,284 @@
+Hey chatgpt i am making a using node js :
+
+here i am going to tell folder names
+
+i have made three folders called public,server,views and one file named project.js in my computer drive,
+public contains two folders called -"css" and "script"
+
+
+server cotains three folders- config, models, routes
+routes has file called main.js.
+
+
+the folder "views" contains two folders -layouts,partials
+
+
+files named about.ejs , header.ejs and index.ejs are in partials
+
+files named header.ejs and main.ejs are in layouts
+
+ a file named db.js is in server contains code :
+
+
+const mongoose= require('mongoose');
+const connectDB =async ()=> {
+
+try{
+
+mongoose.set('strictQuery',false);
+const conn=await mongoose.connect(process.env.MONGODB_URI);
+console.log(`Database connected : ${conn.connection.host}`)
+}
+catch (error){
+
+console.log(error);
+
+}
+
+
+}
+
+module.exports = connectDB;
+
+
+
+folder named models contains a file name post.js have code :
+
+const mongoose=require('mongoose');
+
+
+const Schema=mongoose.Schema;
+const postshcema=new Schema(
+
+{
+
+title:{
+
+type:String,
+required:true
+},
+
+
+Body:{
+
+type:String,
+required:true
+
+
+},
+
+
+createdAt:{
+
+type:Date,
+default:Date.now
+
+},
+
+updatedAt:{
+
+type:Date,
+default:Date.now
+
+}
+
+}
+);
+
+module.exports=mongoose.model('Post',postschema);
+
+
+
+folder named routes have file main.js contains this code :
+
+
+const express = require('express');
+const router = express.Router();
+const Post = require('../models/post');
+
+
+router.get('',(req,res)=>{
+
+const local={
+
+title:"node blog",
+desc:"create it likeu neer di",
+
+
+}
+
+
+res.render('index',{local});
+
+})
+
+router.get('/about',(req,res)=>{
+
+res.render('about');
+
+})
+
+
+module.exports = router;
+
+
+layout folder have a file named main.ejs contains code :
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="scripts/script.js"></script>
+</head>
+<body>
+    
+<%- include('../partials/search.ejs') %>
+
+<div class="container">
+
+<%- include('../partials/header.ejs') %>
+
+<main>
+<%- body %>
+
+
+</main>
+
+
+<%- include('../partials/footer.ejs') %>
+
+</div>
+
+</body>
+</html>
+
+
+folder named partials contains files: footer.ejs, header.ejs, search.ejs
+
+
+code of footer.ejs is :
+
+
+<footer class="footer">
+
+&copy; <%= new Date().getFullYear(); %> Its Summer * Buiid with NodeJS and MONGODB 
+
+</footer> 
+
+
+code of header.ejs is :
+
+ <header class="header">
+
+<a href="/" class="h_logo">nodeJS</a>
+
+<nav>
+
+<ul>
+
+<li>
+
+    <a href="">Home</a>
+
+</li>
+
+
+
+<li>
+    <a href="">About</a>
+
+
+</li>
+
+
+
+
+<li>
+
+    <a href="">Contact</a>
+
+
+</li>
+
+</ul>
+
+</nav>
+
+<div class="header__button">
+
+<button class="seach">
+    Search
+</button>
+
+</div>
+
+
+</header> 
+
+
+code of search.ejs is:
+
+<div class="searchBar">
+
+    <div class="container">
+
+
+    <form action ="/search" class="search_form" role="search" method="POST"></form>
+
+    <input type="search"
+    
+    aria-label="Search"
+    id="searchInput"
+    name="searchTerm"
+    placeholder="Serch the site"
+
+    >
+     
+
+
+    </div>
+</div>
+
+folder named views have two files also called : about.ejs and index.ejs
+
+code in index.ejs is :
+
+<div calss="author">
+
+<h1 class="au1"> Hi, I am Summer</h1>
+<p class="au2">Web Developer and content Creator</p>
+
+</div>
+
+<img src="https://imgs.search.brave.com/NsIpXdJ2WUSPCkSLgew9nSCvZ-rY4RLmVfoc293MJog/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmd1/aW0uY28udWsvaW1n/L21lZGlhL2MwZjIw/NjAxN2NlNWEzYWFj/Y2MyMmI5M2E5NGE4/MzBlNWMxYmQ5NWEv/NjZfMzRfNTI0NV8z/MTcyL21hc3Rlci81/MjQ1LmpwZz93aWR0/aD00NDUmZHByPTEm/cz1ub25lJmNyb3A9/bm9uZQ" alt="">
+
+<section class="articles">
+
+<h2>Latest Posts</h2>
+
+<ul>
+
+
+<li>
+<a href="#">
+
+<span>Post titles</span>
+<br>
+<span>Date</span>
+
+</a>
+
+
+</li>
+
+</ul>
+<a href="#">&lt; View older posts</a>
+
+</section>
+
+
+

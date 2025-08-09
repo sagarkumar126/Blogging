@@ -1,0 +1,96 @@
+
+const express = require('express');
+const router = express.Router();
+const Post = require('../models/post');
+
+
+router.get('',async (req,res)=>{
+
+
+try{
+
+const data =await Post.find();
+res.render('index',{data});
+
+
+
+}
+catch(error){
+console.log(error);
+
+}
+
+
+})
+
+
+
+async function insertPost() {
+  const count = await Post.countDocuments();
+  if (count === 0) {
+    await Post.insertMany([
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      },
+      {
+        title: "Hansel And Gretel",
+        Body: "Witches used to cause trouble in village so Hansel And Gretel killed 'em "
+      }
+    ]);
+    console.log('Posts inserted');
+  } else {
+    console.log('Posts already exist, skipping insertion');
+  }
+}
+
+
+// insertPost();
+
+
+
+
+
+
+
+router.get('/about',(req,res)=>{
+
+res.render('about');
+
+})
+
+
+module.exports = router;
+

@@ -1,0 +1,42 @@
+
+<div class="author">
+  <h1 class="au1">Hi, I am Scott Summer</h1>
+  <p class="au2">Web Developer and Content Creator</p>
+</div>
+
+<img
+  src="https://imgs.search.brave.com/NsIpXdJ2WUSPCkSLgew9nSCvZ-rY4RLmVfoc293MJog/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmd1/aW0uY28udWsvaW1n/L21lZGlhL2MwZjIw/NjAxN2NlNWEzYWFj/Y2MyMmI5M2E5NGE4/MzBlNWMxYmQ5NWEv/NjZfMzRfNTI0NV8z/MTcyL21hc3Rlci81/MjQ1LmpwZz93aWR0/aD00NDUmZHByPTEm/cz1ub25lJmNyb3A9/bm9uZQ"
+  alt="Author Image"
+/>
+
+<section class="articles">
+  <h2>Latest Posts</h2>
+
+
+<ul>
+  <% data.forEach(post => { %>
+    <li>
+      <a class="postdate" href="/post/<%= post._id %>">
+        <span class="title"><%= post.title %></span>
+        <span class="date"><%= post.createdAt.toString() %></span>
+      </a>
+    </li>
+  <% }) %>
+</ul>
+
+
+
+
+<%  if(nextPage !==null) { %>
+
+  <a href="/?page=<%= nextPage  %>" class="pagination" >&lt; View older posts</a>
+
+
+<% } %>
+
+
+
+
+  <br>
+  <br><br>
+</section>
