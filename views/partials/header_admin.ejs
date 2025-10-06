@@ -1,22 +1,13 @@
 <header class="header">
-
-  <a href="#" class="header_login">Admin Panel</a>
-
-
-  <nav>
-    <ul>
-      <li><a href="">Home</a></li>
-      <li><a href="">About</a></li>
-      <li><a href="">Contact</a></li>
-    </ul>
-  </nav>
-
-  <% if (currentRoute !== '/admin') { %>
-  <div class="header__button">
-    <button>
-      <a id="logout" href="/logout">Log Out</a>
-    </button>
-  </div>
+<a href="#" class="header_login">Admin Panel</a>
+<nav><ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul></nav>
+<% if (currentRoute !== '/admin') { %>
+<div class="header__button"><button>
+      <a id="logout" href="/logout">Log Out</a></button></div>
   <% } %>
 
 </header>

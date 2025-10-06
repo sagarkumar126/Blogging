@@ -16,9 +16,6 @@ const app = express();
 const Port = process.env.PORT || 5000;
 
 
-
-
-
 connectDB(); 
 
 app.use(express.urlencoded({extended:true}));
@@ -44,6 +41,12 @@ app.use(expressLayout);
 app.set('layout', './layouts/main');
 app.set('view engine', 'ejs');
 app.locals.isActiveRoute=isActiveRoute;
+
+app.use((req, res, next) => {
+  res.locals.user = req.cookies.token ? true : false;
+  next();
+});
+
 
 
 app.set('layout extractLocals', true); // ✅ THIS LINE FIXES YOUR ISSUE

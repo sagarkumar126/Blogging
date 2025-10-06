@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/post');
 
+
 router.get('', async (req, res) => {
   try {
     const perPage = 10;
@@ -23,11 +24,13 @@ router.get('', async (req, res) => {
       current: page,
       nextPage: hasNextPage ? nextPage : null,
       currentRoute: '/',  // homepage route
+      showAddButton: true // <-- ADD THIS LINE
     });
   } catch (error) {
     console.log(error);
   }
 });
+
 
 async function insertPost() {
   const count = await Post.countDocuments();
@@ -106,5 +109,20 @@ router.get('/about', (req, res) => {
     currentRoute: '/about',  // about page route
   });
 });
+
+
+router.get('/', (req, res) => {
+  res.render('index', { currentRoute: '/' });
+});
+
+router.get('/about', (req, res) => {
+  res.render('about', { currentRoute: '/about' });
+});
+
+router.get('/contact', (req, res) => {
+  res.render('contact', { currentRoute: '/contact' });
+});
+
+
 
 module.exports = router;
