@@ -1,52 +1,94 @@
+<section class="hero-section">
 
-<div class="author">
-  <h1 class="au1">Hi, I am Scott Summer</h1>
-  <p class="au2">Web Developer and Content Creator</p>
-</div>
+  <div class="hero-top">
+    <span class="hero-tag">Web Developer & Content Creator</span>
 
-<img
-  src="https://imgs.search.brave.com/NsIpXdJ2WUSPCkSLgew9nSCvZ-rY4RLmVfoc293MJog/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmd1/aW0uY28udWsvaW1n/L21lZGlhL2MwZjIw/NjAxN2NlNWEzYWFj/Y2MyMmI5M2E5NGE4/MzBlNWMxYmQ5NWEv/NjZfMzRfNTI0NV8z/MTcyL21hc3Rlci81/MjQ1LmpwZz93aWR0/aD00NDUmZHByPTEm/cz1ub25lJmNyb3A9/bm9uZQ"
-  alt="Author Image"
-/>
+    <h1 class="hero-title">
+      Hi, I am <span class="hero-accent">Sagar Kumar</span>
+    </h1>
+
+    <p class="hero-subtitle">I build clean, thoughtful things for the web.</p>
+  </div>
+
+  <div class="hero-image-card">
+    <img src="https://images.pexels.com/photos/265667/pexels-photo-265667.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sagar Kumar" />
+  </div>
+
+</section>
 
 <section class="articles">
-  <h2>Latest Posts</h2>
 
-
-<ul>
-  <% data.forEach(post => { %>
-    <li>
-      <a class="postdate" href="/post/<%= post._id %>">
-        <span class="title"><%= post.title %></span>
-        <span class="date"><%= post.createdAt.toString() %></span>
-      </a>
-    </li>
-  <% }) %>
-</ul>
-
-
-<% if (showAddButton) { %>
-  <div style="margin: 20px 0;">
-    <a href="/add-post" class="btn-add">Add New Post</a>
+  <div class="articles-header">
+    <h2>All Blogs</h2>
+    <% if (locals.user) { %>
+      <a href="/add-post" class="btn-add-post">+ Add Your Post</a>
+    <% } %>
   </div>
-<% } %>
 
+  <% if (!data || data.length === 0) { %>
+    <p class="no-posts">No blogs available yet. Be the first to post!</p>
+  <% } %>
 
+  <ul>
+    <% data.forEach(post => { %>
+      <li class="post-item">
+        <a class="postdate" href="/post/<%= post._id %>">
+          <span class="title"><%= post.title %></span>
+          <div class="post-meta">
+            <span class="date">
+              📅 <%= new Date(post.createdAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) %>
+              &nbsp;•&nbsp;
+              🕒 <%= new Date(post.createdAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }) %>
+            </span>
 
+            <% if (post.updatedAt && new Date(post.updatedAt).getTime() !== new Date(post.createdAt).getTime()) { %>
+              <span class="updated-at">
+                ✏️ Updated: <%= new Date(post.updatedAt).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) %>
+                &nbsp;•&nbsp;
+                <%= new Date(post.updatedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true }) %>
+              </span>
+            <% } %>
 
-<%  if(nextPage !==null) { %>
+            <% if (post.author && post.author.username) { %>
+              <span class="author-email">✉ <%= post.author.username %></span>
+            <% } else { %>
+              <span class="author-email">✉ unknown</span>
+            <% } %>
+          </div>
+        </a>
 
-  <a href="/?page=<%= nextPage  %>" class="pagination" >&lt; View older posts</a>
+        <% if (typeof currentUserId !== 'undefined' && currentUserId !== null
+               && post.author && post.author._id
+               && post.author._id.toString() === currentUserId) { %>
+          <div class="post-controls">
+            <a href="/edit-post/<%= post._id %>" class="btn">Edit</a>
+            <form action="/delete-post/<%= post._id %>?_method=DELETE" method="POST" class="delete-form" data-confirm-delete>
+              <input type="submit" value="Delete" class="btn btn-delete">
+            </form>
+          </div>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
 
+  <% if (totalPages > 1) { %>
+    <div class="pagination-wrap">
+      <% if (current > 1) { %>
+        <a href="/?page=<%= current - 1 %>" class="pagination">‹ Prev</a>
+      <% } else { %>
+        <span class="pagination disabled">‹ Prev</span>
+      <% } %>
 
-<% } %>
+      <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="/?page=<%= i %>" class="pagination <%= (i === current) ? 'active' : '' %>"><%= i %></a>
+      <% } %>
 
-
-
-
-  <br>
-  <br><br>
-
-
+      <% if (current < totalPages) { %>
+        <a href="/?page=<%= current + 1 %>" class="pagination">Next ›</a>
+      <% } else { %>
+        <span class="pagination disabled">Next ›</span>
+      <% } %>
+    </div>
+  <% } %>
 
 </section>

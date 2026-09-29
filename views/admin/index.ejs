@@ -1,26 +1,18 @@
-<h3>Sign In</h3>
+<div class="login-wrapper">
 
-<form action="/admin" method="POST">
-  <label for="username"><b>Username</b></label>
-  <input type="text" placeholder="Enter Username" name="username" required>
+  <h1>Welcome to Our Blog</h1>
+  <p>Sign in with your Google account to continue</p>
 
-  <label for="password"><b>Password</b></label>
-<input type="password" placeholder="Enter Password" name="password" required>
-<input type="submit" value="Login" class="btn">
+  <% if (typeof error !== 'undefined' && error === 'google') { %>
+    <p style="color: #ef4444; font-weight: 500; margin-bottom: 20px;">
+      Login failed. Only @gmail.com accounts are allowed.
+    </p>
+  <% } %>
 
+  <a href="/auth/google" class="google-btn">
+    <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
+    Continue with Google
+  </a>
 
-<% if (!locals.user) { %>
-  <div style="margin-top: 20px;">
-    <a href="/register">
-      <p class="not_reg">If not registered,register below </p>
-      <button type="button">Register</button>
-    </a>
-  </div>
-<% } %>
-
-
-
-
-</form>
-
+</div>
 

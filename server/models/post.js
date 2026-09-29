@@ -24,3 +24,7 @@ const postschema = new Schema({
 });
 
 module.exports = mongoose.model('Post', postschema);
+
+
+
+
